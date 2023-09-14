@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Scroller</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            /* background-color:  #734a91; */
+            background-color: rgb(139, 0, 139);
+        }
+        h1{
+            color: #ccc;
+            font-weight: 700;
+            font-size:35px;
+            font-variant:small-caps;
+
+        
+        }
+
+        #profile-display {
+            height: 500px;
+            width: 600px;
+            /* max-width: 500px;
+            max-height: 700px; */
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            /* border-radius: 10px; */
+            box-shadow: 2px 2px 2px 2px rgb(9, 5, 5) ;
+            background-color: #ffffff;
+        }
+
+        img {
+            /* max-width: 100%; */
+            height: 200px;
+            width: 300px;
+        }
+
+        #profile-info {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        #prev-btn{
+            background-color: #f1d7ff;
+            height: 40px;
+            width: 260px;
+            box-shadow: 1px 1px 2px 1px  #250237 ;
+            font-size: large;
+        }
+        #next-btn{
+            background-color: #f1d7ff;
+            height: 40px;
+            width: 260px;
+            box-shadow: 1px 1px 2px 1px  #250237 ;
+            font-size: large;
+        }
+    </style>
+</head>
+<body>
+    <h1>Profile Scroller</h1>
+    <div id="profile-display">
+        <img id="profile-image" src="" alt="Profile Image" height="200px">
+        <hr>
+        <div id="profile-info">
+            <p><strong>Name : </strong> <span id="profile-name"></span></p>
+            <hr>
+            <p><strong>Age : </strong> <span id="profile-age"></span></p>
+            <hr>
+            <p><strong>Location : </strong> <span id="profile-location"></span></p>
+            <hr>
+            <p><strong>Preference : </strong> <span id="profile-preference"></span></p>
+            <hr>
+            <p><strong>Marital Status : </strong> <span id="profile-maritalstatus"></span></p>
+        </div>
+    </div>
+    <br>
+    <button id="prev-btn">Previous</button>
+    <button id="next-btn">Next</button><br><br>
+
+    <script>
+        // Sample profiles
+        const profiles = [
+            {
+                name: "Park jimin",
+                age: 28,
+                location: "South Korea",
+                preference: "Singer",
+                maritalstatus: "Unmarried",
+                image: "https://imageio.forbes.com/specials-images/imageserve/64220f7565b1c240be10b24d/0x0.jpg?format=jpg&crop=1485,990,x0,y61,safe&width=1200" 
+            },
+            {
+                name: "Jeon Junkook",
+                age: 25,
+                location: "South Korea",
+                preference: "Singer , Dancer",
+                maritalstatus: "Unmarried",
+                image: "https://wallpaperaccess.com/full/3081519.jpg"
+            },
+            {
+                name: "Kim Taehyung",
+                age: 28,
+                location: "South Korea",
+                preference: "Dancer",
+                maritalstatus: "Unmarried",
+                image: "https://www.musicmundial.com/en/wp-content/uploads/2023/02/BTS-Taehyung-stars-in-a-Korean-dorama-on-Netflix-and-ARMY-didnt-know-it.jpg"
+            },
+            {
+                name: "Min Yoongi",
+                age: 25,
+                location: "South Korea",
+                preference: "Singer , Dancer",
+                maritalstatus: "Unmarried",
+                image: "https://w0.peakpx.com/wallpaper/470/833/HD-wallpaper-yoongi-bangtan-bts-bts-suga-bts-yoongi-dynamite-suga-suga-yoongi.jpg"
+            },
+            {
+                name: "Kim Namjoon",
+                age: 29,
+                location: "South Korea",
+                preference: "Singer",
+                maritalstatus: "Unmarried",
+                image: "https://in.hellomagazine.com/images/027c-16ba7a3a9cd3-d5d87b6dedf6-1000/horizontal-1200/rm-of-bts.jpg" 
+            },
+            {
+                name: "Jung Ho-seok",
+                age: 28,
+                location: "South Korea",
+                preference: "Singer,Dancer",
+                maritalstatus: "Unmarried",
+                image: "https://etcanada.com/wp-content/uploads/2023/01/GettyImages-1457706480.jpg?quality=80&strip=all&w=450&h=300&crop=1" 
+            },
+            {
+                name: "Kim Seok-jin",
+                age: 30,
+                location: "South Korea",
+                preference: "Singer",
+                maritalstatus: "Unmarried",
+                image: "https://static-koimoi.akamaized.net/wp-content/new-galleries/2022/06/when-bts-jin-was-caught-with-a-cndom-box-unleashing-a-major-controversy-001.jpg" 
+            },
+        ];
+
+        let currentProfileIndex = 0;
+
+        function displayProfile(profileIndex) {
+            const profile = profiles[profileIndex];
+            if (profile) {
+                document.getElementById("profile-image").src = profile.image;
+                document.getElementById("profile-name").textContent = profile.name;
+                document.getElementById("profile-age").textContent = profile.age;
+                document.getElementById("profile-location").textContent = profile.location;
+                document.getElementById("profile-preference").textContent = profile.preference;
+                document.getElementById("profile-maritalstatus").textContent = profile.maritalstatus;
+            }
+        }
+
+        displayProfile(currentProfileIndex);
+
+        document.getElementById("next-btn").addEventListener("click", () => {
+            currentProfileIndex++;
+            if (currentProfileIndex >= profiles.length) {
+                currentProfileIndex = 0;
+            }
+            displayProfile(currentProfileIndex);
+        });
+
+        document.getElementById("prev-btn").addEventListener("click", () => {
+            currentProfileIndex--;
+            if (currentProfileIndex < 0) {
+                // currentProfileIndex = profiles.length - 1;
+            }
+            displayProfile(currentProfileIndex);
+        });
+    </script>
+</body>
+</html>
